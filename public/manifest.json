@@ -1,0 +1,10 @@
+{
+  "name": "FERADIOZ",
+  "short_name": "FERADIOZ",
+  "description": "Your private circle",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09090f",
+  "theme_color": "#09090f",
+  "icons": []
+}
