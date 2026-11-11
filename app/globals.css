@@ -31,3 +31,5 @@ html,body{background:#f7f8fc;color:#171827}
 .toast{background:#fff;border-color:#ded9ef;color:#29243b;box-shadow:0 10px 40px #20233a22}
 .toast button{color:#7657c7}
 .site-credit{background:#f7f8fc;border-color:#e3e5ee;color:#74788b}.site-credit span{color:#6f9630}.site-credit strong{color:#7657c7}
+
+.empty-state{padding:28px;text-align:center}.empty-state .modal-symbol{margin:0 auto 15px}.empty-state b{font:600 16px 'Space Grotesk';color:#171827}.empty-state p,.no-friends{font-size:11px;line-height:1.7;color:#74788b;max-width:340px;margin:8px auto 0}.no-friends{margin:10px 0 18px}
