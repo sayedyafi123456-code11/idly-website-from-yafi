@@ -23,9 +23,11 @@ export default function AuthGate({ children }: { children: React.ReactNode }) {
     if (error) {
       setMessage("Member database is not ready yet. Ask the owner to run the FERADIOZ SQL setup.");
       setStatus(null);
+      setChecking(false);
       return;
     }
     setStatus(data.status as ProfileStatus);
+    setChecking(false);
   }
 
   useEffect(() => {
