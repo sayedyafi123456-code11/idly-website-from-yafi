@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "FERADIOZ — Your circle, your space",
   description: "A private social space made for your friends.",
   manifest: "/manifest.json",
-  themeColor: "#09090f",
+  themeColor: "#f7f8fc",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
