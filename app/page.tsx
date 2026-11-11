@@ -1,5 +1,7 @@
 "use client";
 
+import AuthGate from "@/components/auth-gate";
+
 import { useState } from "react";
 import { Bell, Compass, Heart, Home, ImagePlus, LockKeyhole, MessageCircle, MoreHorizontal, Plus, Search, Send, ShieldCheck, Sparkles, Users, X } from "lucide-react";
 
@@ -25,7 +27,7 @@ export default function HomePage() {
     setPosts(current => current.map(post => post.id === id ? { ...post, liked: !post.liked, likes: post.likes + (post.liked ? -1 : 1) } : post));
   }
 
-  return <main className="app-shell">
+  return <AuthGate><main className="app-shell">
     <aside className="sidebar">
       <a className="brand" href="#"><span className="brand-mark">F</span><span>FERADIOZ<small>YOUR PRIVATE CIRCLE</small></span></a>
       <div className="side-label">MENU</div>
@@ -53,5 +55,5 @@ export default function HomePage() {
     {showJoin&&<div className="modal-backdrop" onClick={()=>setShowJoin(false)}><div className="modal" onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setShowJoin(false)}><X/></button><div className="modal-symbol"><LockKeyhole/></div><span className="eyebrow">FRIENDS ONLY</span><h2>Find your people.</h2><p>FERADIOZ is a private circle. Send a join request and the owner can approve you.</p><input placeholder="Your name" /><input placeholder="Your username" /><button className="primary-wide" onClick={()=>{setShowJoin(false);setNotice("Join requests will work after the secure member system is connected.")}}>Send join request <Send size={16}/></button><small className="modal-foot">No public sign-ups. Every member is approved.</small></div></div>}
     {showPost&&<div className="modal-backdrop" onClick={()=>setShowPost(false)}><div className="modal" onClick={e=>e.stopPropagation()}><button className="modal-close" onClick={()=>setShowPost(false)}><X/></button><div className="modal-symbol"><ImagePlus/></div><span className="eyebrow">SHARE A MOMENT</span><h2>What’s happening?</h2><textarea value={postText} onChange={e=>setPostText(e.target.value)} placeholder="Share something with your circle..." /><button className="primary-wide" onClick={addPost}>Post to your circle <Send size={16}/></button></div></div>}
     {likedStory!==null&&people[likedStory]&&<div className="modal-backdrop" onClick={()=>setLikedStory(null)}><div className="story-modal" onClick={e=>e.stopPropagation()}><button className="modal-close light-close" onClick={()=>setLikedStory(null)}><X/></button><div className={"avatar "+people[likedStory].color}>{people[likedStory].avatar}</div><h2>{people[likedStory].name}’s story</h2><p>Stories from your friends will appear here.</p><button className="primary-wide" onClick={()=>setLikedStory(null)}>Close story</button></div></div>}
-  </main>;
+  </main></AuthGate>;
 }
