@@ -33,3 +33,22 @@ html,body{background:#f7f8fc;color:#171827}
 .site-credit{background:#f7f8fc;border-color:#e3e5ee;color:#74788b}.site-credit span{color:#6f9630}.site-credit strong{color:#7657c7}
 
 .empty-state{padding:28px;text-align:center}.empty-state .modal-symbol{margin:0 auto 15px}.empty-state b{font:600 16px 'Space Grotesk';color:#171827}.empty-state p,.no-friends{font-size:11px;line-height:1.7;color:#74788b;max-width:340px;margin:8px auto 0}.no-friends{margin:10px 0 18px}
+
+
+/* Supabase authentication and member approval */
+.auth-screen{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 80% 10%,#e8e0ff 0,transparent 34%),#f7f8fc}
+.auth-card{width:min(100%,420px);padding:34px;border:1px solid #e3e5ee;border-radius:24px;background:#fff;box-shadow:0 24px 80px #29234a12}
+.auth-mark{width:52px;height:52px;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#b99bff,#7654d8);color:#21133b;font:700 32px 'Space Grotesk';margin-bottom:22px}
+.auth-kicker{font-size:9px;letter-spacing:2px;color:#7657c7;font-weight:800}
+.auth-card h1{font:600 30px 'Space Grotesk';letter-spacing:-1px;margin:10px 0}
+.auth-card>p{font-size:12px;line-height:1.7;color:#707487;margin:0 0 22px}
+.auth-card label{display:block;font-size:10px;font-weight:700;color:#555b70;margin:13px 0}
+.auth-card label input{display:block;width:100%;margin-top:7px;padding:13px 14px;border:1px solid #e1e3ed;border-radius:11px;background:#f7f8fc;color:#171827;outline:none;font-size:12px}
+.auth-card label input:focus{border-color:#9879e7;box-shadow:0 0 0 3px #9879e71a}
+.auth-submit{width:100%;padding:14px;border:0;border-radius:11px;background:#d9f59a;color:#171b0d;font-size:12px;font-weight:800;margin-top:8px}
+.auth-submit:disabled{opacity:.65;cursor:wait}
+.auth-switch{display:block;width:100%;border:0;background:transparent;color:#7657c7;font-size:11px;font-weight:700;padding:15px 5px 5px}
+.auth-card>small{display:block;text-align:center;color:#85899a;font-size:9px;margin-top:18px}
+.auth-message{background:#f3efff;border:1px solid #e5dcff;color:#4e3b82;padding:11px;border-radius:10px;font-size:11px;line-height:1.6}
+.auth-session-bar{height:38px;background:#f0ecfb;border-bottom:1px solid #e2daf5;display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:0 20px;font-size:10px;color:#6a6380}
+.auth-session-bar button{border:0;background:transparent;color:#6545b8;font-size:10px;font-weight:800}
