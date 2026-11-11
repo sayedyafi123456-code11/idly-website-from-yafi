@@ -1,5 +1,5 @@
--- FERADIOZ member approval schema
--- Run this file once in Supabase Dashboard > SQL Editor > New query.
+-- FERADIOZ member approval + private Join PIN
+-- Run in Supabase Dashboard > SQL Editor. Safe to run again.
 
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
@@ -45,7 +45,43 @@ create trigger on_feradioz_auth_user_created
 after insert on auth.users
 for each row execute procedure public.create_feradioz_profile();
 
--- Owner approval: after a friend requests access, run:
+-- The PIN table is not readable by normal users.
+create table if not exists public.feradioz_settings (
+  setting_key text primary key,
+  setting_value text not null
+);
+alter table public.feradioz_settings enable row level security;
+revoke all on public.feradioz_settings from anon, authenticated;
+
+-- Set your own private Join PIN here before sharing it with friends.
+insert into public.feradioz_settings (setting_key, setting_value)
+values ('join_pin', 'CHANGE-THIS-PIN')
+on conflict (setting_key) do nothing;
+
+create or replace function public.verify_feradioz_join_pin(input_pin text)
+returns boolean
+language sql
+security definer
+set search_path = ''
+as $$
+  select coalesce(
+    (select setting_value = input_pin
+     from public.feradioz_settings
+     where setting_key = 'join_pin'),
+    false
+  );
+$$;
+
+revoke all on function public.verify_feradioz_join_pin(text) from public;
+grant execute on function public.verify_feradioz_join_pin(text) to anon, authenticated;
+
+-- IMPORTANT: change CHANGE-THIS-PIN to your own PIN in the SQL editor:
+-- update public.feradioz_settings set setting_value = 'YOUR-PRIVATE-PIN' where setting_key = 'join_pin';
+--
+-- Supabase Dashboard > Authentication > Sign In / Providers > Email:
+-- Turn OFF "Confirm email" so users do not need an email address.
+--
+-- Approve a friend:
 -- update public.profiles set status = 'approved' where username = 'friend_username';
--- Reject a request with:
+-- Reject a friend:
 -- update public.profiles set status = 'rejected' where username = 'friend_username';
