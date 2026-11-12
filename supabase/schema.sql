@@ -5,7 +5,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   username text unique not null,
   display_name text not null default '',
-  status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
+  status text not null default 'approved' check (status in ('pending', 'approved', 'rejected')),
   created_at timestamptz not null default now()
 );
 
@@ -35,7 +35,7 @@ begin
   chosen_username := lower(coalesce(new.raw_user_meta_data ->> 'username', split_part(new.email, '@', 1)));
   chosen_name := coalesce(new.raw_user_meta_data ->> 'display_name', chosen_username);
   insert into public.profiles (id, username, display_name, status)
-  values (new.id, chosen_username, chosen_name, 'pending');
+  values (new.id, chosen_username, chosen_name, 'approved');
   return new;
 end;
 $$;
